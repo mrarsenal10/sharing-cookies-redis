@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
@@ -9,15 +11,23 @@ const redisOptions = {
 
 const sessionOptions = {
   store: new RedisStore(redisOptions),
-  secret: process.env.SESSION_SECRET,
-  logErrors: true,
-  unset: 'destroy'
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+  logError: true,
+  cookie  : {
+    httpOnly: true,
+    secure: false,
+    maxAge  : 60 * 60 * 1000
+  }
 }
- 
+
+app.set('trust proxy', 1);
 app.use(session(sessionOptions));
 
 app.get('/login', function(req, res){
   // .. insert auth logic here .. //
+console.log(req.session)
   if(!req.session.user){
     req.session.user = {
       id : Math.random()

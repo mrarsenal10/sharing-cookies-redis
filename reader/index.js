@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
@@ -10,12 +12,15 @@ const redisOptions = {
 const sessionOptions = {
   store: new RedisStore(redisOptions),
   secret: process.env.SESSION_SECRET,
-  logErrors: true
+  logErrors: true,
+  resave: false,
+  saveUninitialized: true,
 }
- 
+
 app.use(session(sessionOptions));
 
 app.use(function checkSession(req, res, next){
+
   if(!req.session.user){
     //alternately, res.redirect('/increment'), res.redirect('/login'), etc.
     return res.json(403, {

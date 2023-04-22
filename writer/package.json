@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node --watch index.js"
   },
   "keywords": [],
   "author": "Sequoia McDowell <sequoia.mcdowell@gmail.com> (http://sequoia.makes.software/)",
   "license": "ISC",
   "dependencies": {
     "connect-redis": "^3.3.0",
-    "express": "^4.15.3",
-    "express-session": "^1.15.3"
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3"
   }
 }
