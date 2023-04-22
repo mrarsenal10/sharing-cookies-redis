@@ -11,7 +11,7 @@ const redisOptions = {
 
 const sessionOptions = {
   store: new RedisStore(redisOptions),
-  secret: 'keyboard cat',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   logError: true,
